@@ -29,9 +29,13 @@ def create_app(test_config=None):
     @app.route('/hello')
     def hello():
         return 'Hello, World!'
-    # Imports our database and runs the database
+    # Imports our database from the current directory and runs the database
     from . import db
     db.init_app(app)
+
+    # Imports our auth from the current directory
+    from . import auth
+    app.register_blueprint(auth.bp)
 
     return app
 
